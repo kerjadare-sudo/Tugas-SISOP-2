@@ -5,7 +5,7 @@ def increment():
  global counter
  for _ in range(100000):
      time.sleep(0.001)
-     counter += 3
+     counter += 1
 t1 = threading.Thread(target=increment)
 t2 = threading.Thread(target=increment)
 t1.start()
