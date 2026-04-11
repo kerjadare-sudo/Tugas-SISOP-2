@@ -1,0 +1,26 @@
+Analisis Deadlock
+Kenapa Terjadi Deadlock?
+Ada 2 thread dan 2 lock:
+thread1 ambil lock1 -> lock2
+thread2 ambil lock2 -> lock1
+Masalah muncul karena urutan penguncian berbeda
+• Analisis 4 Kondisi Coffman
+1. Mutual Exclusion (Saling Eksklusif) 
+lock1 dan lock2 hanya bisa dipakai satu thread dalam satu waktu. Sudah terpenuhi karena pakai threading.Lock()
+2. Hold and Wait (Menahan sambil menunggu) 
+thread1:
+pegang lock1
+nunggu lock2
+thread2:
+pegang lock2
+nunggu lock1
+Keduanya pegang resource sambil nunggu resource lain
+3. No Preemption (Tidak bisa direbut paksa) 
+- Lock tidak bisa diambil paksa dari thread lain
+- Harus dilepas sendiri (release / keluar dari with)
+- Python Lock memang tidak bisa dipaksa dilepas
+4. Circular Wait (Saling menunggu melingkar) 
+Terjadi siklus:
+thread1 -> nunggu lock2
+thread2 -> nunggu lock1
+ Ini membentuk lingkaran deadlock
